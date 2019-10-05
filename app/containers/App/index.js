@@ -32,7 +32,7 @@ export default function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/features" component={FeaturePage} />
+        <Route path="/notes" component={FeaturePage} />
         <Route path="" component={NotFoundPage} />
       </Switch>
       {/* <Footer /> */}

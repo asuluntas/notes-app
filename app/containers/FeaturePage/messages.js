@@ -4,7 +4,7 @@ export const scope = 'boilerplate.containers.FeaturePage';
 
 export default defineMessages({
   header: {
-    id: `${scope}.header`,
+    id: `${scope}.notes.header`,
     defaultMessage: 'Notes',
   },
 });

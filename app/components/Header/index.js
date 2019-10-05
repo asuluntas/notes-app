@@ -18,8 +18,8 @@ function Header() {
         <HeaderLink to="/">
           <FormattedMessage {...messages.home} />
         </HeaderLink>
-        <HeaderLink to="/features">
-          <FormattedMessage {...messages.features} />
+        <HeaderLink to="/notes">
+          <FormattedMessage {...messages.notes} />
         </HeaderLink>
       </NavBar>
     </div>
