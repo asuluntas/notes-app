@@ -1,8 +1,3 @@
-/*
- * FeaturePage
- *
- * List all the features
- */
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
@@ -13,14 +8,14 @@ import messages from './messages';
 // import ListItem from './ListItem';
 // import ListItemTitle from './ListItemTitle';
 
-export default function FeaturePage() {
+export default function Notes() {
   return (
     <div>
       <Helmet>
-        <title>Feature Page</title>
+        <title>Notes</title>
         <meta
           name="description"
-          content="Feature page of React.js Boilerplate application"
+          content="Notes page of React.js Boilerplate application"
         />
       </Helmet>
       <H1>

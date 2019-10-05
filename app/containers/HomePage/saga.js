@@ -14,7 +14,7 @@ import request from 'utils/request';
  */
 export function* getNotes() {
   const note = yield select(makeSelectNote());
-  const requestURL = `/fetchMessages`;
+  const requestURL = '/fetchMessages';
 
   try {
     // Call our request helper (see 'utils/request')
