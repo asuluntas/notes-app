@@ -17,6 +17,20 @@ const app = express();
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
 
+const messages = ['abc', 'jddkdk'];
+
+// app.post('/addMessage', (req, res) => {
+//   console.log('body', req.body);
+//   messages.unshift(req.body);
+//   console.log('messages', messages);
+//   // res.status(201).send(JSON.stringify(messages[0]));
+//   res.send('hardcoded response');
+// });
+
+app.get('/fetchMessages', (req, res) => {
+  res.status(200).send(JSON.stringify(messages));
+});
+
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
   outputPath: resolve(process.cwd(), 'build'),
