@@ -1,10 +1,5 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- */
-
-import React, { useEffect, memo } from 'react';
+// import React, { useEffect, memo } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
@@ -15,46 +10,44 @@ import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
-  makeSelectRepos,
+  makeSelectNotes,
   makeSelectLoading,
   makeSelectError,
 } from 'containers/App/selectors';
 import H2 from 'components/H2';
-import ReposList from 'components/ReposList';
-import AtPrefix from './AtPrefix';
-import CenteredSection from './CenteredSection';
+import NotesList from 'components/NotesList';
 import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { loadRepos } from '../App/actions';
-import { changeUsername } from './actions';
-import { makeSelectUsername } from './selectors';
+import { loadNotes } from '../App/actions';
+import { changeNote } from './actions';
+import { makeSelectNote } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
 const key = 'home';
 
 export function HomePage({
-  username,
+  note,
   loading,
   error,
-  repos,
+  notes,
   onSubmitForm,
-  onChangeUsername,
+  onChangeNote,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  useEffect(() => {
-    // When initial state username is not null, submit the form to load repos
-    if (username && username.trim().length > 0) onSubmitForm();
-  }, []);
+  // useEffect(() => {
+  //   // When initial state username is not null, submit the form to load notes
+  //   if (note && note.trim().length > 0) onSubmitForm();
+  // }, []);
 
-  const reposListProps = {
+  const notesListProps = {
     loading,
     error,
-    repos,
+    notes,
   };
 
   return (
@@ -67,34 +60,23 @@ export function HomePage({
         />
       </Helmet>
       <div>
-        <CenteredSection>
-          <H2>
-            <FormattedMessage {...messages.startProjectHeader} />
-          </H2>
-          <p>
-            <FormattedMessage {...messages.startProjectMessage} />
-          </p>
-        </CenteredSection>
         <Section>
           <H2>
-            <FormattedMessage {...messages.trymeHeader} />
+            <FormattedMessage {...messages.header} />
           </H2>
           <Form onSubmit={onSubmitForm}>
-            <label htmlFor="username">
-              <FormattedMessage {...messages.trymeMessage} />
-              <AtPrefix>
-                <FormattedMessage {...messages.trymeAtPrefix} />
-              </AtPrefix>
+            <label htmlFor="note">
+              <FormattedMessage {...messages.text} />
               <Input
-                id="username"
+                id="note"
                 type="text"
-                placeholder="mxstbr"
-                value={username}
-                onChange={onChangeUsername}
+                placeholder="write something..."
+                value={note}
+                onChange={onChangeNote}
               />
             </label>
           </Form>
-          <ReposList {...reposListProps} />
+          <NotesList {...notesListProps} />
         </Section>
       </div>
     </article>
@@ -104,25 +86,25 @@ export function HomePage({
 HomePage.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  notes: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   onSubmitForm: PropTypes.func,
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
+  note: PropTypes.string,
+  onChangeNote: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  repos: makeSelectRepos(),
-  username: makeSelectUsername(),
+  notes: makeSelectNotes(),
+  note: makeSelectNote(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
 });
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: evt => dispatch(changeUsername(evt.target.value)),
+    onChangeNote: evt => dispatch(changeNote(evt.target.value)),
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
+      dispatch(loadNotes());
     },
   };
 }

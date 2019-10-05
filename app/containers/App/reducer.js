@@ -8,39 +8,33 @@
  */
 
 import produce from 'immer';
-import {
-  LOAD_STRINGS_SUCCESS,
-  LOAD_STRINGS,
-  LOAD_STRINGS_ERROR,
-} from './constants';
+import { LOAD_NOTES, LOAD_NOTES_SUCCESS, LOAD_NOTES_ERROR } from './constants';
 
 // The initial state of the App
 export const initialState = {
   loading: false,
   error: false,
-  currentUser: false,
-  userData: {
-    repositories: false,
-  },
+  currentNote: false,
+  notes: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const appReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case LOAD_STRINGS:
+      case LOAD_NOTES:
         draft.loading = true;
         draft.error = false;
-        draft.userData.repositories = false;
+        draft.notes = false;
         break;
 
-      case LOAD_STRINGS_SUCCESS:
-        draft.userData.repositories = action.repos;
+      case LOAD_NOTES_SUCCESS:
+        draft.notes = action.notes;
         draft.loading = false;
-        draft.currentUser = action.username;
+        draft.currentNote = action.note;
         break;
 
-      case LOAD_STRINGS_ERROR:
+      case LOAD_NOTES_ERROR:
         draft.error = action.error;
         draft.loading = false;
         break;

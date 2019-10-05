@@ -1,16 +1,12 @@
-/**
- * Homepage selectors
- */
-
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
 const selectHome = state => state.home || initialState;
 
-const makeSelectUsername = () =>
+const makeSelectNote = () =>
   createSelector(
     selectHome,
-    homeState => homeState.username,
+    homeState => homeState.note,
   );
 
-export { selectHome, makeSelectUsername };
+export { selectHome, makeSelectNote };
