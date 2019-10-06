@@ -14,13 +14,13 @@ import {
 } from 'containers/App/selectors';
 import NotesList from 'components/NotesList';
 import H1 from 'components/H1';
-// import { loadNotes } from '../App/actions';
+import { loadNotes } from '../App/actions';
 import saga from './saga';
 import messages from './messages';
 
 const key = 'notes';
 
-export function Notes({ loading, error, notes }) {
+export function Notes({ loading, error, notes, onLoadNotes }) {
   // useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
@@ -42,6 +42,10 @@ export function Notes({ loading, error, notes }) {
       <H1>
         <FormattedMessage {...messages.header} />
       </H1>
+      <button onClick={onLoadNotes} type="button">
+        {' '}
+        Get{' '}
+      </button>
       <NotesList {...notesListProps} />
     </div>
   );
@@ -51,6 +55,7 @@ Notes.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   notes: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  onLoadNotes: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -59,18 +64,18 @@ const mapStateToProps = createStructuredSelector({
   error: makeSelectError(),
 });
 
-// export function mapDispatchToProps(dispatch) {
-//   return {
-//     onSubmitForm: evt => {
-//       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-//       dispatch(loadNotes());
-//     },
-//   };
-// }
+export function mapDispatchToProps(dispatch) {
+  return {
+    onLoadNotes: evt => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
+      dispatch(loadNotes());
+    },
+  };
+}
 
 const withConnect = connect(
   mapStateToProps,
-  // mapDispatchToProps,
+  mapDispatchToProps,
 );
 
 export default compose(

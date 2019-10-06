@@ -12,6 +12,7 @@ const homeReducer = (state = initialState, action) =>
       case CHANGE_NOTE:
         draft.note = action.note;
         break;
+      // TODO: case ADD_NOTE: clear the form
     }
   });
 

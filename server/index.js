@@ -21,9 +21,7 @@ app.use(bodyParser.json());
 const messages = ['Buy milk', 'DMI project is due wednesday'];
 
 app.post('/addNote', (req, res) => {
-  console.log('body', req.body);
   messages.unshift(req.body.text);
-  console.log('messages', messages);
   res.status(201).send(JSON.stringify(req.body.text));
 });
 
