@@ -16,11 +16,7 @@ import NotesList from 'components/NotesList';
 import H1 from 'components/H1';
 // import { loadNotes } from '../App/actions';
 import saga from './saga';
-// import { loadNotes } from '../App/actions';
 import messages from './messages';
-// import List from './List';
-// import ListItem from './ListItem';
-// import ListItemTitle from './ListItemTitle';
 
 const key = 'notes';
 
@@ -47,13 +43,6 @@ export function Notes({ loading, error, notes }) {
         <FormattedMessage {...messages.header} />
       </H1>
       <NotesList {...notesListProps} />
-      {/* <List>
-        <ListItem>
-          <ListItemTitle>
-
-          </ListItemTitle>
-        </ListItem>
-      </List> */}
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 const express = require('express');
 const logger = require('./logger');
-
+const bodyParser = require('body-parser');
 const argv = require('./argv');
 const port = require('./port');
 const setup = require('./middlewares/frontendMiddleware');
@@ -13,21 +13,21 @@ const ngrok =
     : false;
 const { resolve } = require('path');
 const app = express();
+app.use(bodyParser.json());
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
 
-const messages = ['abc', 'jddkdk'];
+const messages = ['Buy milk', 'DMI project is due wednesday'];
 
-// app.post('/addMessage', (req, res) => {
-//   console.log('body', req.body);
-//   messages.unshift(req.body);
-//   console.log('messages', messages);
-//   // res.status(201).send(JSON.stringify(messages[0]));
-//   res.send('hardcoded response');
-// });
+app.post('/addNote', (req, res) => {
+  console.log('body', req.body);
+  messages.unshift(req.body.text);
+  console.log('messages', messages);
+  res.status(201).send(JSON.stringify(req.body.text));
+});
 
-app.get('/fetchMessages', (req, res) => {
+app.get('/fetchNotes', (req, res) => {
   res.status(200).send(JSON.stringify(messages));
 });
 

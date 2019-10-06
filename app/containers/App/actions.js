@@ -2,9 +2,9 @@ import {
   LOAD_NOTES,
   LOAD_NOTES_SUCCESS,
   LOAD_NOTES_ERROR,
-  // ADD_NOTE,
-  // ADD_NOTE_SUCCESS,
-  // ADD_NOTE_ERROR,
+  ADD_NOTE,
+  ADD_NOTE_SUCCESS,
+  ADD_NOTE_ERROR,
 } from './constants';
 
 export function loadNotes() {
@@ -28,23 +28,23 @@ export function notesLoadingError(error) {
   };
 }
 
-// export function addNote(note) {
-//   return {
-//     type: ADD_NOTE,
-//     note,
-//   };
-// }
+export function addNote(note) {
+  return {
+    type: ADD_NOTE,
+    note,
+  };
+}
 
-// export function noteAdded(note) {
-//   return {
-//     type: ADD_NOTE_SUCCESS,
-//     note,
-//   };
-// }
+export function noteAdded(note) {
+  return {
+    type: ADD_NOTE_SUCCESS,
+    note,
+  };
+}
 
-// export function repoAddingError(error) {
-//   return {
-//     type: ADD_NOTE_ERROR,
-//     error,
-//   };
-// }
+export function noteAddingError(error) {
+  return {
+    type: ADD_NOTE_ERROR,
+    error,
+  };
+}

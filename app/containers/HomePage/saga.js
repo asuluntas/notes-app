@@ -1,25 +1,33 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { LOAD_NOTES } from 'containers/App/constants';
-import { notesLoaded, notesLoadingError } from 'containers/App/actions';
+import { ADD_NOTE } from 'containers/App/constants';
+import { noteAdded, noteAddingError } from 'containers/App/actions';
 import { makeSelectNote } from 'containers/HomePage/selectors';
-
 import request from 'utils/request';
 
-/**
- * Github repos request/response handler
- */
-export function* getNotes() {
+export function* addNote() {
   const note = yield select(makeSelectNote());
-  const requestURL = '/fetchMessages';
+  const requestURL = '/addNote';
 
   try {
+    console.log('making the call', note);
+    const response = yield call(request, requestURL, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ text: note }),
+    });
+
+    console.log('response', response);
     // Call our request helper (see 'utils/request')
-    const notes = yield call(request, requestURL);
-    console.log('notes', notes);
+    // const notes = yield call(request, requestURL);
+    // console.log('notes', notes);
     // yield put(notesLoaded(repos, 'asuluntas'));
-    yield put(notesLoaded(notes, note));
+    yield put(noteAdded(response));
   } catch (err) {
-    yield put(notesLoadingError(err));
+    console.log(err);
+    yield put(noteAddingError(err));
   }
 }
 
@@ -31,7 +39,7 @@ export default function* watchLoadNotes() {
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
-  yield takeLatest(LOAD_NOTES, getNotes);
+  yield takeLatest(ADD_NOTE, addNote);
 }
 
 // import { call, put, select, takeLatest } from 'redux-saga/effects';

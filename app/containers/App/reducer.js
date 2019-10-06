@@ -8,7 +8,14 @@
  */
 
 import produce from 'immer';
-import { LOAD_NOTES, LOAD_NOTES_SUCCESS, LOAD_NOTES_ERROR } from './constants';
+import {
+  LOAD_NOTES,
+  LOAD_NOTES_SUCCESS,
+  LOAD_NOTES_ERROR,
+  ADD_NOTE,
+  ADD_NOTE_SUCCESS,
+  ADD_NOTE_ERROR,
+} from './constants';
 
 // The initial state of the App
 export const initialState = {
@@ -37,6 +44,22 @@ const appReducer = (state = initialState, action) =>
       case LOAD_NOTES_ERROR:
         draft.error = action.error;
         draft.loading = false;
+        break;
+
+      case ADD_NOTE:
+        draft.loading = true;
+        draft.error = false;
+        draft.currentNote = action.note;
+        break;
+
+      case ADD_NOTE_SUCCESS:
+        draft.loading = false;
+        draft.currentNote = action.note;
+        break;
+
+      case ADD_NOTE_ERROR:
+        draft.loading = false;
+        draft.error = action.error;
         break;
     }
   });

@@ -2,21 +2,15 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { LOAD_NOTES } from 'containers/App/constants';
 import { notesLoaded, notesLoadingError } from 'containers/App/actions';
 import { makeSelectNote } from 'containers/HomePage/selectors';
-
 import request from 'utils/request';
 
-/**
- * Github repos request/response handler
- */
 export function* getNotes() {
   const note = yield select(makeSelectNote());
-  const requestURL = '/fetchMessages';
+  const requestURL = '/fetchNotes';
 
   try {
-    // Call our request helper (see 'utils/request')
     const notes = yield call(request, requestURL);
     console.log('notes', notes);
-    // yield put(notesLoaded(repos, 'asuluntas'));
     yield put(notesLoaded(notes, note));
   } catch (err) {
     yield put(notesLoadingError(err));

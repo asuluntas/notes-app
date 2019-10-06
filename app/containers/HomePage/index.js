@@ -1,4 +1,3 @@
-// import React, { useEffect, memo } from 'react';
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
@@ -6,10 +5,10 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
+  makeSelectCurrentNote,
   makeSelectNotes,
   makeSelectLoading,
   makeSelectError,
@@ -20,7 +19,7 @@ import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { loadNotes } from '../App/actions';
+import { addNote } from '../App/actions';
 import { changeNote } from './actions';
 import { makeSelectNote } from './selectors';
 import reducer from './reducer';
@@ -32,22 +31,20 @@ export function HomePage({
   note,
   loading,
   error,
-  notes,
+  // notes,
+  submittedNote,
   onSubmitForm,
   onChangeNote,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  // useEffect(() => {
-  //   // When initial state username is not null, submit the form to load notes
-  //   if (note && note.trim().length > 0) onSubmitForm();
-  // }, []);
+  const notes2 = submittedNote ? [submittedNote] : false;
 
   const notesListProps = {
     loading,
     error,
-    notes,
+    notes: notes2,
   };
 
   return (
@@ -89,11 +86,13 @@ HomePage.propTypes = {
   notes: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   onSubmitForm: PropTypes.func,
   note: PropTypes.string,
+  submittedNote: PropTypes.string,
   onChangeNote: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   notes: makeSelectNotes(),
+  submittedNote: makeSelectCurrentNote(),
   note: makeSelectNote(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
@@ -104,7 +103,8 @@ export function mapDispatchToProps(dispatch) {
     onChangeNote: evt => dispatch(changeNote(evt.target.value)),
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadNotes());
+      console.log('dispatch addNote');
+      dispatch(addNote(evt.target.value));
     },
   };
 }
