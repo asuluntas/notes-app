@@ -7,12 +7,6 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-import {
-  makeSelectCurrentNote,
-  makeSelectNotes,
-  makeSelectLoading,
-  makeSelectError,
-} from 'containers/App/selectors';
 import H2 from 'components/H2';
 import NotesList from 'components/NotesList';
 import Form from './Form';
@@ -21,7 +15,12 @@ import Section from './Section';
 import messages from './messages';
 import { addNote } from '../App/actions';
 import { changeNote } from './actions';
-import { makeSelectNote } from './selectors';
+import {
+  makeSelectNote,
+  makeSelectLoadingAddNote,
+  makeSelectAddNoteError,
+  makeSelectRecentlyAddedNote,
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
@@ -31,20 +30,17 @@ export function HomePage({
   note,
   loading,
   error,
-  // notes,
-  submittedNote,
+  recentlyAddedNote,
   onSubmitForm,
   onChangeNote,
 }) {
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  const notes2 = submittedNote ? [submittedNote] : false;
-
   const notesListProps = {
     loading,
     error,
-    notes: notes2,
+    notes: recentlyAddedNote ? [recentlyAddedNote] : false,
   };
 
   return (
@@ -83,19 +79,17 @@ export function HomePage({
 HomePage.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  notes: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  onSubmitForm: PropTypes.func,
   note: PropTypes.string,
-  submittedNote: PropTypes.string,
+  recentlyAddedNote: PropTypes.string,
+  onSubmitForm: PropTypes.func,
   onChangeNote: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  notes: makeSelectNotes(),
-  submittedNote: makeSelectCurrentNote(),
   note: makeSelectNote(),
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
+  loading: makeSelectLoadingAddNote(),
+  error: makeSelectAddNoteError(),
+  recentlyAddedNote: makeSelectRecentlyAddedNote(),
 });
 
 export function mapDispatchToProps(dispatch) {

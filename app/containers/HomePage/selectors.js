@@ -9,4 +9,28 @@ const makeSelectNote = () =>
     homeState => homeState.note,
   );
 
-export { selectHome, makeSelectNote };
+const makeSelectLoadingAddNote = () =>
+  createSelector(
+    selectHome,
+    homeState => homeState.loadingAddNote,
+  );
+
+const makeSelectAddNoteError = () =>
+  createSelector(
+    selectHome,
+    homeState => homeState.addNoteError,
+  );
+
+const makeSelectRecentlyAddedNote = () =>
+  createSelector(
+    selectHome,
+    homeState => homeState.recentlyAddedNote,
+  );
+
+export {
+  selectHome,
+  makeSelectNote,
+  makeSelectLoadingAddNote,
+  makeSelectAddNoteError,
+  makeSelectRecentlyAddedNote,
+};
