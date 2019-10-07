@@ -12,7 +12,7 @@ import {
   makeSelectLoading,
   makeSelectError,
 } from 'containers/App/selectors';
-import NotesList from 'components/NotesList';
+import NotesList2 from 'components/NotesList2';
 import H1 from 'components/H1';
 import { loadNotes } from '../App/actions';
 import saga from './saga';
@@ -28,6 +28,7 @@ export function Notes({ loading, error, notes, onLoadNotes }) {
     loading,
     error,
     notes,
+    onComponentDidMount: onLoadNotes,
   };
 
   return (
@@ -42,11 +43,7 @@ export function Notes({ loading, error, notes, onLoadNotes }) {
       <H1>
         <FormattedMessage {...messages.header} />
       </H1>
-      <button onClick={onLoadNotes} type="button">
-        {' '}
-        Get{' '}
-      </button>
-      <NotesList {...notesListProps} />
+      <NotesList2 {...notesListProps} />
     </div>
   );
 }
