@@ -1,8 +1,8 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { ADD_NOTE } from 'containers/App/constants';
 import { noteAdded, noteAddingError } from 'containers/App/actions';
 import { makeSelectNote } from 'containers/HomePage/selectors';
 import request from 'utils/request';
+import { ADD_NOTE } from './constants';
 
 export function* addNote() {
   const note = yield select(makeSelectNote());

@@ -7,13 +7,13 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 // import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
+import NotesList2 from 'components/NotesList2';
+import H1 from 'components/H1';
 import {
   makeSelectNotes,
   makeSelectLoading,
   makeSelectError,
-} from 'containers/App/selectors';
-import NotesList2 from 'components/NotesList2';
-import H1 from 'components/H1';
+} from './selectors';
 import { loadNotes } from '../App/actions';
 import saga from './saga';
 import messages from './messages';

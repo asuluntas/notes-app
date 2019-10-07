@@ -2,10 +2,13 @@ import {
   LOAD_NOTES,
   LOAD_NOTES_SUCCESS,
   LOAD_NOTES_ERROR,
+} from '../Notes/constants';
+
+import {
   ADD_NOTE,
   ADD_NOTE_SUCCESS,
   ADD_NOTE_ERROR,
-} from './constants';
+} from '../HomePage/constants';
 
 export function loadNotes() {
   return {

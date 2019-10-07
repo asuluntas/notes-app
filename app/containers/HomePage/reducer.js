@@ -1,6 +1,10 @@
 import produce from 'immer';
-import { CHANGE_NOTE } from './constants';
-import { ADD_NOTE_SUCCESS, ADD_NOTE, ADD_NOTE_ERROR } from '../App/constants';
+import {
+  CHANGE_NOTE,
+  ADD_NOTE_SUCCESS,
+  ADD_NOTE,
+  ADD_NOTE_ERROR,
+} from './constants';
 
 export const initialState = {
   note: '',
