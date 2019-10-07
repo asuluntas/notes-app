@@ -1,5 +1,6 @@
 import produce from 'immer';
 import { CHANGE_NOTE } from './constants';
+import { ADD_NOTE_SUCCESS } from '../App/constants';
 
 export const initialState = {
   note: '',
@@ -12,7 +13,9 @@ const homeReducer = (state = initialState, action) =>
       case CHANGE_NOTE:
         draft.note = action.note;
         break;
-      // TODO: case ADD_NOTE: clear the form
+      case ADD_NOTE_SUCCESS:
+        draft.note = '';
+        break;
     }
   });
 
