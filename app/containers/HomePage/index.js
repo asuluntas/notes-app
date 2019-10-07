@@ -8,7 +8,7 @@ import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import H2 from 'components/H2';
-import NotesList from 'components/NotesList';
+// import NotesList from 'components/NotesList';
 import Form from './Form';
 import Input from './Input';
 import Section from './Section';
@@ -23,6 +23,7 @@ import {
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import AddNoteFeedback from '../../components/AddNoteFeedback';
 
 const key = 'home';
 
@@ -37,7 +38,7 @@ export function HomePage({
   useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
-  const notesListProps = {
+  const addNoteFeedbackProps = {
     loading,
     error,
     notes: recentlyAddedNote ? [recentlyAddedNote] : false,
@@ -69,7 +70,8 @@ export function HomePage({
               />
             </label>
           </Form>
-          <NotesList {...notesListProps} />
+          {/* <NotesList {...notesListProps} /> */}
+          <AddNoteFeedback {...addNoteFeedbackProps} />
         </Section>
       </div>
     </article>
@@ -99,6 +101,12 @@ export function mapDispatchToProps(dispatch) {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       console.log('dispatch addNote');
       dispatch(addNote(evt.target.value));
+      // if (evt.target.value === '') {
+      //   console.log("empty note");
+      //   dispatch(noteAddingError(makeSelectAddNoteError()));
+      // } else {
+      //   dispatch(addNote(evt.target.value));
+      // }
     },
   };
 }
