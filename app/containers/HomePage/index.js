@@ -8,13 +8,11 @@ import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import H2 from 'components/H2';
-// import NotesList from 'components/NotesList';
 import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { addNote } from '../App/actions';
-import { changeNote } from './actions';
+import { changeNote, addNote } from './actions';
 import {
   makeSelectNote,
   makeSelectLoadingAddNote,
@@ -24,13 +22,14 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import AddNoteFeedback from '../../components/AddNoteFeedback';
+// import { emptyNote } from './saga2';
 
 const key = 'home';
 
 export function HomePage({
   note,
-  loading,
-  error,
+  loadingAddNote,
+  addNoteError,
   recentlyAddedNote,
   onSubmitForm,
   onChangeNote,
@@ -39,9 +38,9 @@ export function HomePage({
   useInjectSaga({ key, saga });
 
   const addNoteFeedbackProps = {
-    loading,
-    error,
-    notes: recentlyAddedNote ? [recentlyAddedNote] : false,
+    loadingAddNote,
+    addNoteError,
+    recentlyAddedNote,
   };
 
   return (
@@ -59,18 +58,19 @@ export function HomePage({
             <FormattedMessage {...messages.header} />
           </H2>
           <Form onSubmit={onSubmitForm}>
-            <label htmlFor="note">
+            <label>
               <FormattedMessage {...messages.text} />
               <Input
                 id="note"
                 type="text"
+                required
+                minlength="1"
                 placeholder="write something..."
                 value={note}
                 onChange={onChangeNote}
               />
             </label>
           </Form>
-          {/* <NotesList {...notesListProps} /> */}
           <AddNoteFeedback {...addNoteFeedbackProps} />
         </Section>
       </div>
@@ -79,9 +79,9 @@ export function HomePage({
 }
 
 HomePage.propTypes = {
-  loading: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   note: PropTypes.string,
+  loadingAddNote: PropTypes.bool,
+  addNoteError: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   recentlyAddedNote: PropTypes.string,
   onSubmitForm: PropTypes.func,
   onChangeNote: PropTypes.func,
@@ -89,8 +89,8 @@ HomePage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   note: makeSelectNote(),
-  loading: makeSelectLoadingAddNote(),
-  error: makeSelectAddNoteError(),
+  loadingAddNote: makeSelectLoadingAddNote(),
+  addNoteError: makeSelectAddNoteError(),
   recentlyAddedNote: makeSelectRecentlyAddedNote(),
 });
 
@@ -103,8 +103,9 @@ export function mapDispatchToProps(dispatch) {
       dispatch(addNote(evt.target.value));
       // if (evt.target.value === '') {
       //   console.log("empty note");
-      //   dispatch(noteAddingError(makeSelectAddNoteError()));
+      //   dispatch(emptyNote());
       // } else {
+      //   console.log('value', evt.target.value);
       //   dispatch(addNote(evt.target.value));
       // }
     },

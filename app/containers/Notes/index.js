@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-// import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import NotesList2 from 'components/NotesList2';
 import H1 from 'components/H1';
@@ -14,14 +13,13 @@ import {
   makeSelectLoading,
   makeSelectError,
 } from './selectors';
-import { loadNotes } from '../App/actions';
+import { loadNotes } from './actions';
 import saga from './saga';
 import messages from './messages';
 
 const key = 'notes';
 
 export function Notes({ loading, error, notes, onLoadNotes }) {
-  // useInjectReducer({ key, reducer });
   useInjectSaga({ key, saga });
 
   const notesListProps = {
@@ -56,9 +54,9 @@ Notes.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  notes: makeSelectNotes(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
+  notes: makeSelectNotes(),
 });
 
 export function mapDispatchToProps(dispatch) {

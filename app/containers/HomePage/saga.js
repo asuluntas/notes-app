@@ -1,7 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { noteAdded, noteAddingError } from 'containers/App/actions';
 import { makeSelectNote } from 'containers/HomePage/selectors';
 import request from 'utils/request';
+import { noteAdded, noteAddingError } from './actions';
 import { ADD_NOTE } from './constants';
 
 export function* addNote() {
@@ -34,7 +34,7 @@ export function* addNote() {
 /**
  * Root saga manages watcher lifecycle
  */
-export default function* watchLoadNotes() {
+export default function* watchAddNotes() {
   // Watches for LOAD_STRINGS actions and calls getRepos when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
