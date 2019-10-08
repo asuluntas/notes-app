@@ -1,14 +1,17 @@
 import produce from 'immer';
 
 import homeReducer from '../reducer';
-import { changeUsername } from '../actions';
+import { changeNote, addNote, noteAdded, noteAddingError } from '../actions';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('homeReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      username: '',
+      note: '',
+      loadingAddNote: false,
+      addNoteError: false,
+      recentlyAddedNote: null,
     };
   });
 
@@ -17,12 +20,48 @@ describe('homeReducer', () => {
     expect(homeReducer(undefined, {})).toEqual(expectedResult);
   });
 
-  it('should handle the changeUsername action correctly', () => {
-    const fixture = 'mxstbr';
+  it('should handle the changeNote action correctly', () => {
+    const fixture = 'a test note';
     const expectedResult = produce(state, draft => {
-      draft.username = fixture;
+      draft.note = fixture;
     });
 
-    expect(homeReducer(state, changeUsername(fixture))).toEqual(expectedResult);
+    expect(homeReducer(state, changeNote(fixture))).toEqual(expectedResult);
+  });
+
+  it('should handle the addNote action correctly', () => {
+    const fixture = 'a test note';
+    const expectedResult = produce(state, draft => {
+      draft.loadingAddNote = true;
+      draft.addNoteError = false;
+      draft.recentlyAddedNote = null;
+    });
+
+    expect(homeReducer(state, addNote(fixture))).toEqual(expectedResult);
+  });
+
+  it('should handle the noteAdded action correctly', () => {
+    const fixture = 'a test note';
+    const expectedResult = produce(state, draft => {
+      draft.loadingAddNote = false;
+      draft.note = '';
+      draft.recentlyAddedNote = fixture;
+    });
+
+    expect(homeReducer(state, noteAdded(fixture))).toEqual(expectedResult);
+  });
+
+  it('should handle the noteAddingError action correctly', () => {
+    const fixture = {
+      msg: 'Something went wrong, please try again!',
+    };
+    const expectedResult = produce(state, draft => {
+      draft.loadingAddNote = false;
+      draft.addNoteError = true;
+    });
+
+    expect(homeReducer(state, noteAddingError(fixture))).toEqual(
+      expectedResult,
+    );
   });
 });

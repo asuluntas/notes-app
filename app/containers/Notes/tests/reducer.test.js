@@ -32,19 +32,19 @@ describe('notesReducer', () => {
   it('should handle the notesLoaded action correctly', () => {
     const fixture = [
       {
-        name: 'My Repo',
+        id: 'testId',
+        text: 'a test note',
       },
     ];
-    const notes = [{ id: 'test1', text: 'test2' }];
     const expectedResult = produce(state, draft => {
       draft.loading = false;
-      draft.notes = notes;
+      draft.notes = fixture;
     });
 
     expect(notesReducer(state, notesLoaded(fixture))).toEqual(expectedResult);
   });
 
-  it('should handle the repoLoadingError action correctly', () => {
+  it('should handle the notesLoadingError action correctly', () => {
     const fixture = {
       msg: 'Something went wrong, please try again!',
     };
