@@ -43,6 +43,7 @@ export default function configureStore(initialState = {}, history) {
     composeEnhancers(...enhancers),
   );
 
+  // need this to have sagas running in time for componentDidMount
   sagaMiddleware.run(loadNoteSaga);
 
   // Extensions

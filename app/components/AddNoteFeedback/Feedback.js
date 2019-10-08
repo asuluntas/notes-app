@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const Success = styled.div`
+const Feedback = styled.div`
   padding: 0;
   margin: 0;
   width: 100%;
-  color: green;
+  color: ${props => props.color || 'red'};
   overflow: hidden;
 `;
 
-export default Success;
+export default Feedback;

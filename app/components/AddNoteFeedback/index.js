@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import LoadingIndicator from 'components/LoadingIndicator';
-import Success from './Success';
-import Error from './Error';
+import Feedback from './Feedback';
 
 function AddNoteFeedback({ loadingAddNote, addNoteError, recentlyAddedNote }) {
   if (loadingAddNote) {
@@ -16,19 +15,19 @@ function AddNoteFeedback({ loadingAddNote, addNoteError, recentlyAddedNote }) {
 
   if (addNoteError !== false) {
     return (
-      <Error>
+      <Feedback>
         <div>Something went wrong, please try again!</div>
-      </Error>
+      </Feedback>
     );
   }
 
   if (recentlyAddedNote !== null && recentlyAddedNote.text.length > 0) {
     return (
-      <Success>
+      <Feedback color="green">
         <div>
           &quot;{recentlyAddedNote.text}&quot; successfully added to your notes!
         </div>
-      </Success>
+      </Feedback>
     );
   }
 
