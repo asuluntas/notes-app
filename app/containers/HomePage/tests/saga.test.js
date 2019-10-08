@@ -1,57 +1,49 @@
-/**
- * Tests for HomePage sagas
- */
-
 import { put, takeLatest } from 'redux-saga/effects';
 
-import { LOAD_STRINGS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+import { ADD_NOTE } from '../constants';
+import { noteAdded, noteAddingError } from '../actions';
 
-import githubData, { getRepos } from '../saga';
+import watchAddNotes, { addNote } from '../saga';
 
-const username = 'mxstbr';
+const note = 'a test note';
 
 /* eslint-disable redux-saga/yield-effects */
-describe('getRepos Saga', () => {
-  let getReposGenerator;
+describe('addNote Saga', () => {
+  let addNoteGenerator;
 
   // We have to test twice, once for a successful load and once for an unsuccessful one
   // so we do all the stuff that happens beforehand automatically in the beforeEach
   beforeEach(() => {
-    getReposGenerator = getRepos();
+    addNoteGenerator = addNote();
 
-    const selectDescriptor = getReposGenerator.next().value;
+    const selectDescriptor = addNoteGenerator.next().value;
     expect(selectDescriptor).toMatchSnapshot();
 
-    const callDescriptor = getReposGenerator.next(username).value;
+    const callDescriptor = addNoteGenerator.next(note).value;
     expect(callDescriptor).toMatchSnapshot();
   });
 
-  it('should dispatch the reposLoaded action if it requests the data successfully', () => {
-    const response = [
-      {
-        name: 'First repo',
-      },
-      {
-        name: 'Second repo',
-      },
-    ];
-    const putDescriptor = getReposGenerator.next(response).value;
-    expect(putDescriptor).toEqual(put(reposLoaded(response, username)));
+  it('should dispatch the noteAdded action if it requests the data successfully', () => {
+    const response = {
+      id: 'testId1',
+      text: 'a test note',
+    };
+    const putDescriptor = addNoteGenerator.next(response).value;
+    expect(putDescriptor).toEqual(put(noteAdded(response)));
   });
 
-  it('should call the repoLoadingError action if the response errors', () => {
+  it('should call the noteAddingError action if the response errors', () => {
     const response = new Error('Some error');
-    const putDescriptor = getReposGenerator.throw(response).value;
-    expect(putDescriptor).toEqual(put(repoLoadingError(response)));
+    const putDescriptor = addNoteGenerator.throw(response).value;
+    expect(putDescriptor).toEqual(put(noteAddingError(response)));
   });
 });
 
-describe('githubDataSaga Saga', () => {
-  const githubDataSaga = githubData();
+describe('watchAddNotesSaga Saga', () => {
+  const watchAddNotesSaga = watchAddNotes();
 
   it('should start task to watch for LOAD_STRINGS action', () => {
-    const takeLatestDescriptor = githubDataSaga.next().value;
-    expect(takeLatestDescriptor).toEqual(takeLatest(LOAD_STRINGS, getRepos));
+    const takeLatestDescriptor = watchAddNotesSaga.next().value;
+    expect(takeLatestDescriptor).toEqual(takeLatest(ADD_NOTE, addNote));
   });
 });
