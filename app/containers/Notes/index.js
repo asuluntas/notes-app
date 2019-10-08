@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { useInjectSaga } from 'utils/injectSaga';
-import NotesList2 from 'components/NotesList2';
+import NotesList from 'components/NotesList';
 import H1 from 'components/H1';
 import {
   makeSelectNotes,
@@ -41,7 +41,7 @@ export function Notes({ loading, error, notes, onLoadNotes }) {
       <H1>
         <FormattedMessage {...messages.header} />
       </H1>
-      <NotesList2 {...notesListProps} />
+      <NotesList {...notesListProps} />
     </div>
   );
 }
