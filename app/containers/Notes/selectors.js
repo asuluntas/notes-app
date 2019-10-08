@@ -1,26 +1,26 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectGlobal = state => state.global || initialState;
+const selectNotes = state => state.notes || initialState;
 
 const selectRouter = state => state.router;
 
 const makeSelectLoading = () =>
   createSelector(
-    selectGlobal,
-    globalState => globalState.loading,
+    selectNotes,
+    notesState => notesState.loading,
   );
 
 const makeSelectError = () =>
   createSelector(
-    selectGlobal,
-    globalState => globalState.error,
+    selectNotes,
+    notesState => notesState.error,
   );
 
 const makeSelectNotes = () =>
   createSelector(
-    selectGlobal,
-    globalState => globalState.notes,
+    selectNotes,
+    notesState => notesState.notes,
   );
 
 const makeSelectLocation = () =>
@@ -30,7 +30,7 @@ const makeSelectLocation = () =>
   );
 
 export {
-  selectGlobal,
+  selectNotes,
   makeSelectLoading,
   makeSelectError,
   makeSelectNotes,
