@@ -10,7 +10,7 @@ export const initialState = {
   note: '',
   loadingAddNote: false,
   addNoteError: false,
-  recentlyAddedNote: '',
+  recentlyAddedNote: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -23,7 +23,7 @@ const homeReducer = (state = initialState, action) =>
       case ADD_NOTE:
         draft.loadingAddNote = true;
         draft.addNoteError = false;
-        draft.recentlyAddedNote = '';
+        draft.recentlyAddedNote = null;
         break;
       case ADD_NOTE_SUCCESS:
         draft.loadingAddNote = false;

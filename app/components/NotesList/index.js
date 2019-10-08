@@ -45,7 +45,6 @@ export function mapDispatchToProps(dispatch) {
   return {
     onLoadNotes: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      console.log('dispatch load notes');
       dispatch(loadNotes());
     },
   };

@@ -22,11 +22,11 @@ function AddNoteFeedback({ loadingAddNote, addNoteError, recentlyAddedNote }) {
     );
   }
 
-  if (recentlyAddedNote.length > 0) {
+  if (recentlyAddedNote !== null && recentlyAddedNote.text.length > 0) {
     return (
       <Success>
         <div>
-          &quot;{recentlyAddedNote}&quot; successfully added to your notes!
+          &quot;{recentlyAddedNote.text}&quot; successfully added to your notes!
         </div>
       </Success>
     );
@@ -38,7 +38,7 @@ function AddNoteFeedback({ loadingAddNote, addNoteError, recentlyAddedNote }) {
 AddNoteFeedback.propTypes = {
   loadingAddNote: PropTypes.bool,
   addNoteError: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  recentlyAddedNote: PropTypes.string,
+  recentlyAddedNote: PropTypes.object,
 };
 
 export default AddNoteFeedback;

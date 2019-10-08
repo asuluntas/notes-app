@@ -81,7 +81,7 @@ HomePage.propTypes = {
   note: PropTypes.string,
   loadingAddNote: PropTypes.bool,
   addNoteError: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  recentlyAddedNote: PropTypes.string,
+  recentlyAddedNote: PropTypes.object,
   onSubmitForm: PropTypes.func,
   onChangeNote: PropTypes.func,
 };
@@ -98,7 +98,6 @@ export function mapDispatchToProps(dispatch) {
     onChangeNote: evt => dispatch(changeNote(evt.target.value)),
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      console.log('dispatch addNote');
       dispatch(addNote(evt.target.value));
       // if (evt.target.value === '') {
       //   console.log("empty note");

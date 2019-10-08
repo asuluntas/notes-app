@@ -7,7 +7,7 @@ import Wrapper from './Wrapper';
 function ListItem(props) {
   return (
     <Wrapper>
-      <Item>{props.item}</Item>
+      <Item key={props.item.id}>{props.item.text}</Item>
     </Wrapper>
   );
 }

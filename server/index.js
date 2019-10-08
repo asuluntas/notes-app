@@ -18,11 +18,25 @@ app.use(bodyParser.json());
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
 
-const messages = ['Buy milk', 'DMI project is due wednesday'];
+const messages = [
+  {
+    id: 2,
+    text: 'Buy milk',
+  },
+  {
+    id: 1,
+    text: 'DMI project is due wednesday',
+  },
+];
 
 app.post('/addNote', (req, res) => {
-  messages.unshift(req.body.text);
-  res.status(201).send(JSON.stringify(req.body.text));
+  const nextId = messages.length > 0 ? messages[0].id + 1 : 1;
+  const item = {
+    id: nextId,
+    text: req.body.text,
+  };
+  messages.unshift(item);
+  res.status(201).send(JSON.stringify(item));
 });
 
 app.get('/fetchNotes', (req, res) => {
