@@ -1,18 +1,17 @@
 import {
-  selectGlobal,
+  selectNotes,
   makeSelectLoading,
   makeSelectError,
   makeSelectNotes,
-  makeSelectLocation,
 } from '../selectors';
 
-describe('selectGlobal', () => {
-  it('should select the global state', () => {
-    const globalState = {};
+describe('selectNotes', () => {
+  it('should select the notes state', () => {
+    const notesState = {};
     const mockedState = {
-      global: globalState,
+      notes: notesState,
     };
-    expect(selectGlobal(mockedState)).toEqual(globalState);
+    expect(selectNotes(mockedState)).toEqual(notesState);
   });
 });
 
@@ -21,7 +20,7 @@ describe('makeSelectLoading', () => {
   it('should select the loading', () => {
     const loading = false;
     const mockedState = {
-      global: {
+      notes: {
         loading,
       },
     };
@@ -34,7 +33,7 @@ describe('makeSelectError', () => {
   it('should select the error', () => {
     const error = 404;
     const mockedState = {
-      global: {
+      notes: {
         error,
       },
     };
@@ -47,23 +46,10 @@ describe('makeSelectNotes', () => {
   it('should select the notes', () => {
     const notes = [];
     const mockedState = {
-      global: {
+      notes: {
         notes,
       },
     };
     expect(reposSelector(mockedState)).toEqual(notes);
-  });
-});
-
-describe('makeSelectLocation', () => {
-  const locationStateSelector = makeSelectLocation();
-  it('should select the location', () => {
-    const router = {
-      location: { pathname: '/foo' },
-    };
-    const mockedState = {
-      router,
-    };
-    expect(locationStateSelector(mockedState)).toEqual(router.location);
   });
 });

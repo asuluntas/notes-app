@@ -3,8 +3,6 @@ import { initialState } from './reducer';
 
 const selectNotes = state => state.notes || initialState;
 
-const selectRouter = state => state.router;
-
 const makeSelectLoading = () =>
   createSelector(
     selectNotes,
@@ -23,16 +21,4 @@ const makeSelectNotes = () =>
     notesState => notesState.notes,
   );
 
-const makeSelectLocation = () =>
-  createSelector(
-    selectRouter,
-    routerState => routerState.location,
-  );
-
-export {
-  selectNotes,
-  makeSelectLoading,
-  makeSelectError,
-  makeSelectNotes,
-  makeSelectLocation,
-};
+export { selectNotes, makeSelectLoading, makeSelectError, makeSelectNotes };
