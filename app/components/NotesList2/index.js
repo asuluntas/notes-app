@@ -15,7 +15,6 @@ class NotesList2 extends React.Component {
   }
 
   render() {
-    console.log('Notes List notes', this.props.notes);
     if (this.props.loading) {
       return <List component={LoadingIndicator} />;
     }

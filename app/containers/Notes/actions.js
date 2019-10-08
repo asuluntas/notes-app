@@ -6,11 +6,10 @@ export function loadNotes() {
   };
 }
 
-export function notesLoaded(notes, note) {
+export function notesLoaded(notes) {
   return {
     type: LOAD_NOTES_SUCCESS,
     notes,
-    note,
   };
 }
 

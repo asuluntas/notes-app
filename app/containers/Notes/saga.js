@@ -1,17 +1,13 @@
-import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { makeSelectNote } from 'containers/HomePage/selectors';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import request from 'utils/request';
 import { notesLoaded, notesLoadingError } from './actions';
 import { LOAD_NOTES } from './constants';
 
 export function* getNotes() {
-  const note = yield select(makeSelectNote());
   const requestURL = '/fetchNotes';
-
   try {
     const notes = yield call(request, requestURL);
-    console.log('notes', notes);
-    yield put(notesLoaded(notes, note));
+    yield put(notesLoaded(notes));
   } catch (err) {
     yield put(notesLoadingError(err));
   }

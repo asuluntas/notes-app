@@ -9,7 +9,6 @@ export function* addNote() {
   const requestURL = '/addNote';
 
   try {
-    console.log('making the call', note);
     const response = yield call(request, requestURL, {
       method: 'POST',
       headers: {
@@ -18,15 +17,8 @@ export function* addNote() {
       },
       body: JSON.stringify({ text: note }),
     });
-
-    console.log('response', response);
-    // Call our request helper (see 'utils/request')
-    // const notes = yield call(request, requestURL);
-    // console.log('notes', notes);
-    // yield put(notesLoaded(repos, 'asuluntas'));
     yield put(noteAdded(response));
   } catch (err) {
-    console.log(err);
     yield put(noteAddingError(err));
   }
 }
