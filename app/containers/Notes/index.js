@@ -35,7 +35,7 @@ export function Notes({ loading, error, notes, onLoadNotes }) {
         <title>Notes</title>
         <meta
           name="description"
-          content="Notes page of React.js Boilerplate application"
+          content="Note list page of Notes application"
         />
       </Helmet>
       <H1>
