@@ -25,7 +25,7 @@ const messages = [
   },
   {
     id: 1,
-    text: 'DMI project is due wednesday',
+    text: 'DMI project is due Wednesday',
   },
 ];
 
