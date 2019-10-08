@@ -51,7 +51,7 @@ describe('Home Actions', () => {
       };
       const expectedResult = {
         type: ADD_NOTE_ERROR,
-        note: fixture,
+        error: fixture,
       };
 
       expect(noteAddingError(fixture)).toEqual(expectedResult);
