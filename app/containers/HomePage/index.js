@@ -22,7 +22,6 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import AddNoteFeedback from '../../components/AddNoteFeedback';
-// import { emptyNote } from './saga2';
 
 const key = 'home';
 
