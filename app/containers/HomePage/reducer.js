@@ -1,4 +1,5 @@
 import produce from 'immer';
+import { LOCATION_CHANGE } from 'connected-react-router';
 import {
   CHANGE_NOTE,
   ADD_NOTE_SUCCESS,
@@ -33,6 +34,12 @@ const homeReducer = (state = initialState, action) =>
       case ADD_NOTE_ERROR:
         draft.loadingAddNote = false;
         draft.addNoteError = true;
+        break;
+      case LOCATION_CHANGE:
+        draft.loadingAddNote = false;
+        draft.addNoteError = false;
+        draft.recentlyAddedNote = null;
+        break;
     }
   });
 
