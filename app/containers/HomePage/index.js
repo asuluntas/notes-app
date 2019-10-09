@@ -53,8 +53,8 @@ export function HomePage({
                 required
                 minlength="1"
                 placeholder="write something..."
-                value={note}
                 onChange={onChangeNote}
+                value={note}
               />
             </label>
           </Form>
