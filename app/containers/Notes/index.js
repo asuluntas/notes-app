@@ -34,6 +34,7 @@ export function Notes({ loading, error, notes, onLoadNotes }) {
       </Helmet>
       <H1>
         <FormattedMessage {...messages.header} />
+        <span> {notes.length} notes </span>
       </H1>
       <NotesList {...notesListProps} />
     </div>

@@ -5,6 +5,6 @@ export const scope = 'boilerplate.containers.Notes';
 export default defineMessages({
   header: {
     id: `${scope}.notes.header`,
-    defaultMessage: 'Your notes',
+    defaultMessage: 'You have',
   },
 });
