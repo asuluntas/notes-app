@@ -7,6 +7,7 @@ import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
 import loadNoteSaga from './containers/Notes/saga';
+import addNoteSaga from './containers/HomePage/saga';
 
 export default function configureStore(initialState = {}, history) {
   let composeEnhancers = compose;
@@ -42,6 +43,7 @@ export default function configureStore(initialState = {}, history) {
 
   // need this to have sagas running in time for componentDidMount
   sagaMiddleware.run(loadNoteSaga);
+  sagaMiddleware.run(addNoteSaga);
 
   // Extensions
   store.runSaga = sagaMiddleware.run;

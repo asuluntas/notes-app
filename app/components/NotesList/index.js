@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
+import Feedback from 'components/AddNoteFeedback/Feedback';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -20,10 +21,11 @@ class NotesList extends React.Component {
     }
 
     if (this.props.error !== false) {
-      const ErrorComponent = () => (
-        <ListItem item="Something went wrong, please try again!" />
+      return (
+        <Feedback>
+          <div>Something went wrong, please try again!</div>
+        </Feedback>
       );
-      return <List component={ErrorComponent} />;
     }
 
     if (this.props.notes !== false) {

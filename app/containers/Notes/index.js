@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { useInjectSaga } from 'utils/injectSaga';
 import NotesList from 'components/NotesList';
 import H1 from 'components/H1';
 import {
@@ -14,14 +13,9 @@ import {
   makeSelectError,
 } from './selectors';
 import { loadNotes } from './actions';
-import saga from './saga';
 import messages from './messages';
 
-const key = 'notes';
-
 export function Notes({ loading, error, notes, onLoadNotes }) {
-  useInjectSaga({ key, saga });
-
   const notesListProps = {
     loading,
     error,

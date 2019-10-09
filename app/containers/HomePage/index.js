@@ -5,8 +5,6 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
 import H2 from 'components/H2';
 import Form from './Form';
 import Input from './Input';
@@ -19,11 +17,7 @@ import {
   makeSelectAddNoteError,
   makeSelectRecentlyAddedNote,
 } from './selectors';
-import reducer from './reducer';
-import saga from './saga';
 import AddNoteFeedback from '../../components/AddNoteFeedback';
-
-const key = 'home';
 
 export function HomePage({
   note,
@@ -33,9 +27,6 @@ export function HomePage({
   onSubmitForm,
   onChangeNote,
 }) {
-  useInjectReducer({ key, reducer });
-  useInjectSaga({ key, saga });
-
   const addNoteFeedbackProps = {
     loadingAddNote,
     addNoteError,
@@ -46,10 +37,7 @@ export function HomePage({
     <article>
       <Helmet>
         <title>Home Page</title>
-        <meta
-          name="description"
-          content="A React.js Boilerplate application homepage"
-        />
+        <meta name="description" content="Notes application homepage" />
       </Helmet>
       <div>
         <Section>
