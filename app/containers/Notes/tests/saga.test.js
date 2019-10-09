@@ -26,12 +26,12 @@ describe('getNotes Saga', () => {
   it('should dispatch the notesLoaded action if it requests the data successfully', () => {
     const response = [
       {
-        id: 'testId1',
+        id: 3,
         text: 'a test note1',
       },
       {
-        id: 'testId2',
-        text: 'a test note1',
+        id: 4,
+        text: 'a test note2',
       },
     ];
     const putDescriptor = getNotesGenerator.next(response).value;

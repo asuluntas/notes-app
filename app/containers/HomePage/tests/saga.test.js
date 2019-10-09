@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 
 import { ADD_NOTE } from '../constants';
 import { noteAdded, noteAddingError } from '../actions';
@@ -25,7 +25,7 @@ describe('addNote Saga', () => {
 
   it('should dispatch the noteAdded action if it requests the data successfully', () => {
     const response = {
-      id: 'testId1',
+      id: 3,
       text: 'a test note',
     };
     const putDescriptor = addNoteGenerator.next(response).value;
@@ -42,8 +42,8 @@ describe('addNote Saga', () => {
 describe('watchAddNotesSaga Saga', () => {
   const watchAddNotesSaga = watchAddNotes();
 
-  it('should start task to watch for LOAD_STRINGS action', () => {
+  it('should start task to watch for ADD_NOTE action', () => {
     const takeLatestDescriptor = watchAddNotesSaga.next().value;
-    expect(takeLatestDescriptor).toEqual(takeLatest(ADD_NOTE, addNote));
+    expect(takeLatestDescriptor).toEqual(takeEvery(ADD_NOTE, addNote));
   });
 });

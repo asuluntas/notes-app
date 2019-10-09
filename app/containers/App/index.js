@@ -7,7 +7,6 @@ import HomePage from 'containers/HomePage/Loadable';
 import Notes from 'containers/Notes/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import Header from 'components/Header';
-// import Footer from 'components/Footer';
 
 import GlobalStyle from '../../global-styles';
 
@@ -23,11 +22,8 @@ const AppWrapper = styled.div`
 export default function App() {
   return (
     <AppWrapper>
-      <Helmet
-        titleTemplate="%s - React.js Boilerplate"
-        defaultTitle="React.js Boilerplate"
-      >
-        <meta name="description" content="A React.js Boilerplate application" />
+      <Helmet titleTemplate="%s - Notes" defaultTitle="Notes">
+        <meta name="description" content="Notes application" />
       </Helmet>
       <Header />
       <Switch>
@@ -35,7 +31,6 @@ export default function App() {
         <Route path="/notes" component={Notes} />
         <Route path="" component={NotFoundPage} />
       </Switch>
-      {/* <Footer /> */}
       <GlobalStyle />
     </AppWrapper>
   );

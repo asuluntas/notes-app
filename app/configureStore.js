@@ -36,12 +36,9 @@ export default function configureStore(initialState = {}, history) {
   const middlewares = [sagaMiddleware, routerMiddleware(history)];
 
   const enhancers = [applyMiddleware(...middlewares)];
+  const composed = composeEnhancers(...enhancers);
 
-  const store = createStore(
-    createReducer(),
-    initialState,
-    composeEnhancers(...enhancers),
-  );
+  const store = createStore(createReducer(), initialState, composed);
 
   // need this to have sagas running in time for componentDidMount
   sagaMiddleware.run(loadNoteSaga);

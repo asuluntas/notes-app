@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { makeSelectNote } from 'containers/HomePage/selectors';
 import request from 'utils/request';
 import { noteAdded, noteAddingError } from './actions';
@@ -23,9 +23,6 @@ export function* addNote() {
   }
 }
 
-/**
- * Root saga manages watcher lifecycle
- */
 export default function* watchAddNotes() {
-  yield takeLatest(ADD_NOTE, addNote);
+  yield takeEvery(ADD_NOTE, addNote);
 }

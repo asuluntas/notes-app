@@ -69,16 +69,3 @@ describe('makeSelectRecentlyAddedNote', () => {
     expect(reposSelector(mockedState)).toEqual(recentlyAddedNote);
   });
 });
-
-// describe('makeSelectLocation', () => {
-//   const locationStateSelector = makeSelectLocation();
-//   it('should select the location', () => {
-//     const router = {
-//       location: { pathname: '/foo' },
-//     };
-//     const mockedState = {
-//       router,
-//     };
-//     expect(locationStateSelector(mockedState)).toEqual(router.location);
-//   });
-// });

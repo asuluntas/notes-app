@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import request from 'utils/request';
 import { notesLoaded, notesLoadingError } from './actions';
 import { LOAD_NOTES } from './constants';
@@ -14,5 +14,5 @@ export function* getNotes() {
 }
 
 export default function* watchLoadNotes() {
-  yield takeEvery(LOAD_NOTES, getNotes);
+  yield takeLatest(LOAD_NOTES, getNotes);
 }

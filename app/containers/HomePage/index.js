@@ -98,14 +98,7 @@ export function mapDispatchToProps(dispatch) {
     onChangeNote: evt => dispatch(changeNote(evt.target.value)),
     onSubmitForm: evt => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(addNote(evt.target.value));
-      // if (evt.target.value === '') {
-      //   console.log("empty note");
-      //   dispatch(emptyNote());
-      // } else {
-      //   console.log('value', evt.target.value);
-      //   dispatch(addNote(evt.target.value));
-      // }
+      if (evt.target !== undefined) dispatch(addNote(evt.target.value));
     },
   };
 }

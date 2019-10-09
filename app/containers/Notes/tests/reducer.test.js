@@ -32,7 +32,7 @@ describe('notesReducer', () => {
   it('should handle the notesLoaded action correctly', () => {
     const fixture = [
       {
-        id: 'testId',
+        id: 3,
         text: 'a test note',
       },
     ];
