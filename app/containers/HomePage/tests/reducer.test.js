@@ -41,11 +41,12 @@ describe('homeReducer', () => {
   });
 
   it('should handle the noteAdded action correctly', () => {
-    const fixture = 'a test note';
+    // const fixture = 'a test note';
+    const fixture = { id: 4, text: 'a test note' };
     const expectedResult = produce(state, draft => {
       draft.loadingAddNote = false;
       draft.note = '';
-      draft.recentlyAddedNote = fixture;
+      draft.recentlyAddedNote = fixture.text;
     });
 
     expect(homeReducer(state, noteAdded(fixture))).toEqual(expectedResult);
