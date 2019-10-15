@@ -1,14 +1,11 @@
-import React, { memo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
 import Feedback from 'components/AddNoteFeedback/Feedback';
 
-import { connect } from 'react-redux';
 import { compose } from 'redux';
-
-import { loadNotes } from '../../containers/Notes/actions';
 
 class NotesList extends React.Component {
   componentDidMount() {
@@ -43,18 +40,4 @@ NotesList.propTypes = {
   onComponentDidMount: PropTypes.func,
 };
 
-export function mapDispatchToProps(dispatch) {
-  return {
-    onLoadNotes: evt => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadNotes());
-    },
-  };
-}
-
-const withConnect = connect(mapDispatchToProps);
-
-export default compose(
-  withConnect,
-  memo,
-)(NotesList);
+export default compose()(NotesList);
