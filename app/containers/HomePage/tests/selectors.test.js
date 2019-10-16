@@ -8,9 +8,7 @@ import {
 
 describe('selectHome', () => {
   it('should select the home state', () => {
-    const homeState = {
-      userData: {},
-    };
+    const homeState = {};
     const mockedState = {
       home: homeState,
     };
@@ -58,7 +56,7 @@ describe('makeSelectAddNoteError', () => {
 });
 
 describe('makeSelectRecentlyAddedNote', () => {
-  const reposSelector = makeSelectRecentlyAddedNote();
+  const recentlyAddedNoteSelector = makeSelectRecentlyAddedNote();
   it('should select the recentlyAddedNote', () => {
     const recentlyAddedNote = null;
     const mockedState = {
@@ -66,6 +64,6 @@ describe('makeSelectRecentlyAddedNote', () => {
         recentlyAddedNote,
       },
     };
-    expect(reposSelector(mockedState)).toEqual(recentlyAddedNote);
+    expect(recentlyAddedNoteSelector(mockedState)).toEqual(recentlyAddedNote);
   });
 });

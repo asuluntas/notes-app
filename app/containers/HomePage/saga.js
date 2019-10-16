@@ -17,7 +17,7 @@ export function* addNote() {
       },
       body: JSON.stringify({ text: note }),
     });
-    yield put(noteAdded(response));
+    yield put(noteAdded(response.text));
   } catch (err) {
     yield put(noteAddingError(err));
   }

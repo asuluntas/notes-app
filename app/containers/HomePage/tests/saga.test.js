@@ -29,7 +29,7 @@ describe('addNote Saga', () => {
       text: 'a test note',
     };
     const putDescriptor = addNoteGenerator.next(response).value;
-    expect(putDescriptor).toEqual(put(noteAdded(response)));
+    expect(putDescriptor).toEqual(put(noteAdded(response.text)));
   });
 
   it('should call the noteAddingError action if the response errors', () => {

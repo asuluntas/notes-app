@@ -30,7 +30,7 @@ const homeReducer = (state = initialState, action) =>
       case ADD_NOTE_SUCCESS:
         draft.loadingAddNote = false;
         draft.note = '';
-        draft.recentlyAddedNote = action.note.text;
+        draft.recentlyAddedNote = action.note;
         break;
       case ADD_NOTE_ERROR:
         draft.loadingAddNote = false;

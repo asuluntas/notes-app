@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
 
 import { HomePage, mapDispatchToProps } from '../index';
-// import { changeNote, addNote } from '../actions';
 import { changeNote } from '../actions';
 import configureStore from '../../../configureStore';
 
@@ -81,16 +80,6 @@ describe('<HomePage />', () => {
         const result = mapDispatchToProps(dispatch);
         expect(result.onSubmitForm).toBeDefined();
       });
-
-      // it('should dispatch addNote when called', () => {
-      //   const dispatch = jest.fn();
-      //   const result = mapDispatchToProps(dispatch);
-      //   const note = 'a test note';
-      //   result.onSubmitForm({ target: { value: note } });
-      //   expect(dispatch).toHaveBeenCalledWith(
-      //     addNote(document.getElementById('note').value),
-      //   );
-      // });
 
       it('should preventDefault if called with event', () => {
         const preventDefault = jest.fn();
